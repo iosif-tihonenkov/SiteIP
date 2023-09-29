@@ -1,9 +1,6 @@
-import gevent
-from gevent import socket
-hosts = ['www.developerhouse.ru']
-jobs = [gevent.spawn(gevent.socket.gethostbyname, host) for host in hosts]
-gevent.joinall(jobs)
-count = 0
-for job in jobs:
-    print("IP адрес домена " + hosts[count] + ": " + job.value)
-    count += 1
+import socket
+
+hosts = ['developerhouse.ru', 'google.com', 'vk.com']
+
+for host in hosts:
+    print("Список всех альтернативных имен и адресов для домена: %s -->" % host, socket.gethostbyname_ex(host))
